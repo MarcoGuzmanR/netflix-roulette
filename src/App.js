@@ -1,8 +1,16 @@
 import React from 'react';
+import HelloWorldClass from './HelloWorldClass';
+import HelloWorldPure from './HelloWorldPure';
+import HelloWorldFunctional from './HelloWorldFunctional';
 
 function App() {
   return (
-    <div>Hello World!</div>
+    <>
+      <HelloWorldClass />
+      <HelloWorldPure />
+      <HelloWorldFunctional />
+    </>
   );
 }
+
 export default App;
