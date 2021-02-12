@@ -10,9 +10,9 @@
     ]
   },
   "scripts": {
-    "start": "webpack serve",
+    "start": "webpack serve --open",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "create": "webpack"
+    "build": "webpack"
   },
   "author": "",
   "license": "ISC",
