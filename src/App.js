@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import HelloWorldClass from './HelloWorldClass';
-import HelloWorldPure from './HelloWorldPure';
-import HelloWorldFunctional from './HelloWorldFunctional';
+import HelloWorldClass from './hello-world-class';
+import HelloWorldPure from './hello-world-pure';
+import HelloWorldFunctional from './hello-world-functional';
 
 function App() {
   return (
@@ -13,13 +13,5 @@ function App() {
     </>
   );
 }
-
-const helloWorldCreate = React.createElement(
-  'h3',
-  {},
-  'Hello World - Create Element'
-);
-
-ReactDOM.render(helloWorldCreate, document.getElementById('hello-world-react'));
 
 export default App;
