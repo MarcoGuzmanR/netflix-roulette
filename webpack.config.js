@@ -1,11 +1,12 @@
-var path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'index_bundle.js'
+    filename: 'index_bundle.js',
+    path: path.resolve(__dirname, 'build')
   },
   module: {
     rules: [
@@ -15,14 +16,10 @@ module.exports = {
       },
     ]
   },
-  mode: 'development',
-  devServer: {
-    contentBase: path.resolve(__dirname, 'build'),
-    port: 3000
-  },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'src/index.html'
-    })
+    }),
+    new CleanWebpackPlugin(),
   ]
 }
