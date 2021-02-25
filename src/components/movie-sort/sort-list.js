@@ -3,7 +3,7 @@ import './sort-list.css'
 
 function MovieSort() {
   return (
-    <div class="sort-content">
+    <div className="sort-content">
       <span>Sort By</span>
     </div>
   );
