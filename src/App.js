@@ -4,6 +4,8 @@ import MovieSearch from './components/search/search';
 import MovieFilter from './components/movie-filter/category-filter';
 import MovieSort from './components/movie-sort/sort-list';
 import MovieGrid from './components/movie-grid/grid';
+import ErrorBoundary from './components/error-boundary/error-boundary';
+import ErrorFallback from './components/error-boundary/error-fallback';
 
 function App() {
   return (
@@ -13,7 +15,10 @@ function App() {
       <div className="movie-main-content">
         <MovieFilter />
         <MovieSort />
-        <MovieGrid />
+
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <MovieGrid />
+        </ErrorBoundary>
       </div>
     </div>
   );
