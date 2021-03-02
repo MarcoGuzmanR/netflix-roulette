@@ -1,5 +1,6 @@
 import React from 'react';
 import './app.css';
+import './buttons.css';
 import MovieAdd from './components/movie-add/add';
 import MovieSearch from './components/movie-search/search';
 import MovieFilter from './components/movie-filter/category-filter';
@@ -15,8 +16,10 @@ function App() {
       <MovieSearch />
 
       <div className="movie-main-content">
-        <MovieFilter />
-        <MovieSort />
+        <div className="main-content--header">
+          <MovieFilter />
+          <MovieSort />
+        </div>
 
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <MovieGrid />

@@ -8,7 +8,7 @@ function MovieAdd() {
 
   return (
     <div className="new-movie-container">
-      <button type="button" className="btn-add-movie" onClick={open}>+ ADD MOVIE</button>
+      <button type="button" className="btn-add" onClick={open}>+ ADD MOVIE</button>
       <ModalMovieForm showModal={show} setShowModal={setShow} />
     </div>
   );

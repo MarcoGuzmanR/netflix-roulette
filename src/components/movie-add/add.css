@@ -1,9 +1,4 @@
-.btn-add-movie {
-  background-color: #555;
-  border: none;
-  border-radius: 3px;
-  color: #f65261;
-  height: 50px;
-  padding: 10px 20px;
-  text-align: center;
+.new-movie-container {
+  text-align: right;
+  width: 100%;
 }

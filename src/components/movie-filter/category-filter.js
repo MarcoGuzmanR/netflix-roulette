@@ -3,7 +3,7 @@ import './category-filter.css'
 
 function MovieFilter() {
   return (
-    <div className="filter-content">
+    <div className="filter-container">
       <span>All</span>
       <span>Documentary</span>
     </div>
