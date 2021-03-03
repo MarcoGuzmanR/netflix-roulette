@@ -1,0 +1,21 @@
+.menu-action {
+  position: absolute;
+}
+
+/* Override reach styling for the menu */
+[data-reach-menu-button] {
+  background-color: #232323;
+  border: none;
+  border-radius: 5px;
+  color: white;
+}
+
+[data-reach-menu-list] {
+  background: #232323 !important;
+  border-radius: 5px !important;
+  color: white;
+}
+
+[data-reach-menu-item][data-selected] {
+  background: #f65261 !important;
+}

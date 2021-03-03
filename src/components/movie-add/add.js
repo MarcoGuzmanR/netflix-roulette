@@ -1,6 +1,6 @@
 import React from 'react';
 import './add.css';
-import ModalMovieForm from '../modal/movie-form';
+import ModalMovieForm from '../modals/movie-form';
 
 function MovieAdd() {
   const [show, setShow] = React.useState(false);

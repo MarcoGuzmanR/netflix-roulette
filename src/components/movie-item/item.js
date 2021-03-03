@@ -1,18 +1,33 @@
 import React from 'react';
 import './item.css';
-import ModalMovieForm from '../modal/movie-form';
+import { Menu, MenuButton, MenuList, MenuItem } from '@reach/menu-button';
+import "@reach/menu-button/styles.css";
+import ModalMovieForm from '../modals/movie-form';
+import ModalMovieDelete from '../modals/movie-delete';
 import propTypes from 'prop-types';
 
 function MovieItem({ movie }) {
-  const [show, setShow] = React.useState(false);
-  const open = () => setShow(true);
+  const [showFormModal, setShowFormModal] = React.useState(false);
+  const [showDeleteModal, setShowDeleteModal] = React.useState(false);
+  const openFormModal = () => setShowFormModal(true);
+  const openDeleteModal = () => setShowDeleteModal(true);
 
   return (
-    <div className="item-content">
+    <div className="item-container">
+      <div className="menu-action">
+        <Menu>
+          <MenuButton>Actions</MenuButton>
+          <MenuList>
+            <MenuItem onSelect={openFormModal}>Edit</MenuItem>
+            <MenuItem onSelect={openDeleteModal}>Delete</MenuItem>
+          </MenuList>
+        </Menu>
+      </div>
       <img src={movie.poster_path} height="461" width="337" />
       <p>{movie.title}</p>
-      <button type="button" onClick={open}>Edit Movie</button>
-      <ModalMovieForm showModal={show} setShowModal={setShow} editMovie={movie} />
+
+      <ModalMovieForm showModal={showFormModal} setShowModal={setShowFormModal} editMovie={movie} />
+      <ModalMovieDelete showModal={showDeleteModal} setShowModal={setShowDeleteModal} movieId={movie.id} />
     </div>
   );
 };

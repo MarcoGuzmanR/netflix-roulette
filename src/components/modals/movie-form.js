@@ -2,6 +2,7 @@ import React from 'react';
 import './movie-form.css';
 import { DialogContent, DialogOverlay } from '@reach/dialog';
 import '@reach/dialog/styles.css';
+import propTypes from 'prop-types';
 
 function ModalMovieForm({ showModal, setShowModal, editMovie = {} }) {
   const movieObj = {
@@ -32,7 +33,7 @@ function ModalMovieForm({ showModal, setShowModal, editMovie = {} }) {
             </button>
           </div>
 
-          <h1 className="modal-title">ADD MOVIE</h1>
+          <h1 className="modal-title">{ editMovie.id ? 'EDIT ' : 'ADD '}MOVIE</h1>
           <form onSubmit={handleSubmit}>
             <div className="row-container">
               <label>
@@ -114,7 +115,7 @@ function ModalMovieForm({ showModal, setShowModal, editMovie = {} }) {
 
             <div className="button-container">
               <button className="btn-reset" type="button">RESET</button>
-              <button className="btn-submit" type="submit">SUBMIT</button>
+              <button className="btn-submit" type="submit">{ editMovie.id ? 'SAVE' : 'SUBMIT' }</button>
             </div>
           </form>
         </DialogContent>
@@ -122,5 +123,10 @@ function ModalMovieForm({ showModal, setShowModal, editMovie = {} }) {
     </div>
   );
 }
+
+ModalMovieForm.propTypes = {
+  showModal: propTypes.bool.isRequired,
+  setShowModal: propTypes.func.isRequired,
+};
 
 export default ModalMovieForm;

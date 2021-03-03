@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "@reach/dialog": "^0.13.2",
+    "@reach/menu-button": "^0.13.2",
     "css-loader": "^5.0.2",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
