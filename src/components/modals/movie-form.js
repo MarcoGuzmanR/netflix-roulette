@@ -9,7 +9,7 @@ function ModalMovieForm({ showModal, setShowModal, editMovie = {} }) {
     title:        editMovie?.title        || '',
     release_date: editMovie?.release_date || '',
     movieURL:     editMovie?.movieURL     || '',
-    genre:        editMovie?.genre        || [],
+    genres:       editMovie?.genres        || [],
     overview:     editMovie?.overview     || '',
     runtime:      editMovie?.runtime      || '',
   }

@@ -23,8 +23,15 @@ function MovieItem({ movie }) {
           </MenuList>
         </Menu>
       </div>
+
       <img src={movie.poster_path} height="461" width="337" />
-      <p>{movie.title}</p>
+
+      <div className="title-content">
+        <p className="movie-title">{movie.title}</p>
+        <span className="movie-date">{new Date(movie.release_date).getFullYear()}</span>
+      </div>
+
+      <p className="movie-genres">{movie.genres.join(', ')}</p>
 
       <ModalMovieForm showModal={showFormModal} setShowModal={setShowFormModal} editMovie={movie} />
       <ModalMovieDelete showModal={showDeleteModal} setShowModal={setShowDeleteModal} movieId={movie.id} />
