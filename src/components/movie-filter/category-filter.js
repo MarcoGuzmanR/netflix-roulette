@@ -4,8 +4,9 @@ import './category-filter.css'
 function MovieFilter() {
   return (
     <div className="filter-container">
-      <span>All</span>
-      <span>Documentary</span>
+      <span>ALL</span>
+      <span>DOCUMENTARY</span>
+      <span>COMEDY</span>
     </div>
   );
 };

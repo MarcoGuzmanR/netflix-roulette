@@ -1,3 +1,7 @@
 .filter-container {
-  width: 70%;
+  width: 73%;
+}
+
+.filter-container span {
+  margin-right: 15px;
 }

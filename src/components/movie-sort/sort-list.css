@@ -1,3 +1,21 @@
 .sort-content {
-  width: 30%;
+  display: flex;
+  width: 27%;
+}
+
+.sort-content span {
+  margin-right: 15px;
+}
+
+/* Override reach styling for the list box */
+[data-reach-listbox-arrow] {
+  color: #f65261;
+}
+
+[data-reach-listbox-button] {
+  border: none !important;
+}
+
+[data-reach-listbox-popover] {
+  background-color: #424242 !important;
 }
