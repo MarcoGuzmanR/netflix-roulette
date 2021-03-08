@@ -2,8 +2,8 @@ import React from 'react';
 import './item.css';
 import { Menu, MenuButton, MenuList, MenuItem } from '@reach/menu-button';
 import "@reach/menu-button/styles.css";
-import ModalMovieForm from '../modals/movie-form';
-import ModalMovieDelete from '../modals/movie-delete';
+import ModalMovieForm from '../modals/movieForm';
+import ModalMovieDelete from '../modals/movieDelete';
 import propTypes from 'prop-types';
 
 function MovieItem({ movie }) {

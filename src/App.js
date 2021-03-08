@@ -1,13 +1,13 @@
 import React from 'react';
 import './app.css';
 import './buttons.css';
-import MovieAdd from './components/movie-add/add';
-import MovieSearch from './components/movie-search/search';
-import MovieFilter from './components/movie-filter/category-filter';
-import MovieSort from './components/movie-sort/sort-list';
-import MovieGrid from './components/movie-grid/grid';
-import ErrorBoundary from './components/error-boundary/error-boundary';
-import ErrorFallback from './components/error-boundary/error-fallback';
+import MovieAdd from './components/movieAdd/add';
+import MovieSearch from './components/movieSearch/search';
+import MovieFilter from './components/movieFilter/categoryFilter';
+import MovieSort from './components/movieSort/sortList';
+import MovieGrid from './components/movieGrid/grid';
+import ErrorBoundary from './components/errorBoundary/errorBoundary';
+import ErrorFallback from './components/errorBoundary/errorFallback';
 
 function App() {
   return (

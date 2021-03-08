@@ -1,5 +1,5 @@
 import React from 'react';
-import './category-filter.css'
+import './categoryFilter.css'
 
 function MovieFilter() {
   return (

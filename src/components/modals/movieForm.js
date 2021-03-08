@@ -1,5 +1,5 @@
 import React from 'react';
-import './movie-form.css';
+import './movieForm.css';
 import { DialogContent, DialogOverlay } from '@reach/dialog';
 import '@reach/dialog/styles.css';
 import propTypes from 'prop-types';

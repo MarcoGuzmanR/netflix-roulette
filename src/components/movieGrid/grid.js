@@ -1,6 +1,6 @@
 import React from 'react';
 import './grid.css';
-import MovieItem from '../movie-item/item';
+import MovieItem from '../movieItem/item';
 import movieList from '../../movies';
 
 function MovieGrid() {
