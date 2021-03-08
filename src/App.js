@@ -1,6 +1,8 @@
 import React from 'react';
 import './app.css';
-import MovieSearch from './components/search/search';
+import './buttons.css';
+import MovieAdd from './components/movie-add/add';
+import MovieSearch from './components/movie-search/search';
 import MovieFilter from './components/movie-filter/category-filter';
 import MovieSort from './components/movie-sort/sort-list';
 import MovieGrid from './components/movie-grid/grid';
@@ -10,11 +12,14 @@ import ErrorFallback from './components/error-boundary/error-fallback';
 function App() {
   return (
     <div className="netflix-roulette-content">
+      <MovieAdd />
       <MovieSearch />
 
       <div className="movie-main-content">
-        <MovieFilter />
-        <MovieSort />
+        <div className="main-content--header">
+          <MovieFilter />
+          <MovieSort />
+        </div>
 
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <MovieGrid />

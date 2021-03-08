@@ -3,9 +3,10 @@ import './category-filter.css'
 
 function MovieFilter() {
   return (
-    <div className="filter-content">
-      <span>All</span>
-      <span>Documentary</span>
+    <div className="filter-container">
+      <span>ALL</span>
+      <span>DOCUMENTARY</span>
+      <span>COMEDY</span>
     </div>
   );
 };

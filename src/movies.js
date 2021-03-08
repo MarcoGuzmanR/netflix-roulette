@@ -17,23 +17,22 @@ const movieList = [
     "runtime": 106
   },
   {
-    "id": 269149,
-    "title": "Zootopia",
-    "tagline": "Welcome to the urban jungle.",
-    "vote_average": 7.7,
-    "vote_count": 6795,
-    "release_date": "2016-02-11",
-    "poster_path": "https://image.tmdb.org/t/p/w500/sM33SANp9z6rXW8Itn7NnG1GOEs.jpg",
-    "overview": "Determined to prove herself, Officer Judy Hopps, the first bunny on Zootopia's police force, jumps at the chance to crack her first case - even if it means partnering with scam-artist fox Nick Wilde to solve the mystery.",
-    "budget": 150000000,
-    "revenue": 1023784195,
+    "id": 321612,
+    "title": "Beauty and the Beast",
+    "tagline": "Be our guest.",
+    "vote_average": 6.8,
+    "vote_count": 7861,
+    "release_date": "2017-03-16",
+    "poster_path": "https://image.tmdb.org/t/p/w500/tWqifoYuwLETmmasnGHO7xBjEtt.jpg",
+    "overview": "A live-action adaptation of Disney's version of the classic tale of a cursed prince and a beautiful young woman who helps him break the spell.",
+    "budget": 160000000,
+    "revenue": 1263521126,
     "genres": [
-        "Animation",
-        "Adventure",
         "Family",
-        "Comedy"
+        "Fantasy",
+        "Romance"
     ],
-    "runtime": 108
+    "runtime": 129
   },
   {
     "id": 181808,
@@ -52,7 +51,25 @@ const movieList = [
         "Science Fiction"
     ],
     "runtime": 152
-  }
+  },
+  {
+    "id": 399055,
+    "title": "The Shape of Water",
+    "tagline": "A Fairy Tale for Troubled Times",
+    "vote_average": 7.3,
+    "vote_count": 3200,
+    "release_date": "2017-12-01",
+    "poster_path": "https://image.tmdb.org/t/p/w500/k4FwHlMhuRR5BISY2Gm2QZHlH5Q.jpg",
+    "overview": "An other-worldly story, set against the backdrop of Cold War era America circa 1962, where a mute janitor working at a lab falls in love with an amphibious man being held captive there and devises a plan to help him escape.",
+    "budget": 19500000,
+    "revenue": 185545281,
+    "genres": [
+        "Drama",
+        "Fantasy",
+        "Romance"
+    ],
+    "runtime": 123
+  },
 ];
 
 export default movieList;
