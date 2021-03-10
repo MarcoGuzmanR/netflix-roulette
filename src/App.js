@@ -15,28 +15,17 @@ function App() {
   const [searchPage, setSearchPage] = React.useState(true);
   const [movieDetails, setMovieDetails] = React.useState({});
 
-  function renderContent() {
-    if (searchPage) {
-      return (
-        <>
-          <MovieAdd />
-          <MovieSearch />
-        </>
-      );
-    }
-    else {
-      return <MovieDetails />;
-    }
-  }
-
-  React.useEffect(() => {
-    renderContent();
-  }, [searchPage]);
-
   return (
     <MovieContext.Provider value={{movieDetails, setMovieDetails, searchPage, setSearchPage}}>
       <div className="netflix-roulette-content">
-        { renderContent() }
+        { searchPage ?
+          (
+            <>
+              <MovieAdd />
+              <MovieSearch />
+            </>
+          ) : <MovieDetails />
+        }
 
         <div className="movie-main-content">
           <div className="main-content--header">
