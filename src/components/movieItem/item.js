@@ -4,20 +4,19 @@ import { Menu, MenuButton, MenuList, MenuItem } from '@reach/menu-button';
 import "@reach/menu-button/styles.css";
 import ModalMovieForm from '../modals/movieForm';
 import ModalMovieDelete from '../modals/movieDelete';
-import MovieContext from '../../movieContext/context';
+import { useMovieDetails, useShowSearch } from '../../hooks/customHooks';
 import propTypes from 'prop-types';
 
 function MovieItem({ movie }) {
-  const { setMovieDetails, setSearchPage } = React.useContext(MovieContext);
+  const [, setMovieDetails] = useMovieDetails();
+  const [, setShowSearch]   = useShowSearch();
 
   const [showFormModal, setShowFormModal] = React.useState(false);
   const [showDeleteModal, setShowDeleteModal] = React.useState(false);
-  const openFormModal = () => setShowFormModal(true);
-  const openDeleteModal = () => setShowDeleteModal(true);
 
   function setToggleSearchAndDetails() {
     setMovieDetails(movie);
-    setSearchPage(false);
+    setShowSearch(false);
   }
 
   return (
@@ -26,8 +25,8 @@ function MovieItem({ movie }) {
         <Menu>
           <MenuButton>Actions</MenuButton>
           <MenuList>
-            <MenuItem onSelect={openFormModal}>Edit</MenuItem>
-            <MenuItem onSelect={openDeleteModal}>Delete</MenuItem>
+            <MenuItem onSelect={() => { setShowFormModal(true) }}>Edit</MenuItem>
+            <MenuItem onSelect={() => { setShowDeleteModal(true) }}>Delete</MenuItem>
           </MenuList>
         </Menu>
       </div>

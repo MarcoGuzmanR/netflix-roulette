@@ -12,13 +12,13 @@ import ErrorBoundary from './components/errorBoundary/errorBoundary';
 import ErrorFallback from './components/errorBoundary/errorFallback';
 
 function App() {
-  const [searchPage, setSearchPage] = React.useState(true);
+  const [showSearch, setShowSearch] = React.useState(true);
   const [movieDetails, setMovieDetails] = React.useState({});
 
   return (
-    <MovieContext.Provider value={{movieDetails, setMovieDetails, searchPage, setSearchPage}}>
+    <MovieContext.Provider value={{movieDetails, setMovieDetails, showSearch, setShowSearch}}>
       <div className="netflix-roulette-content">
-        { searchPage ?
+        { showSearch ?
           (
             <>
               <MovieAdd />

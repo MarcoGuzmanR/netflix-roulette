@@ -1,14 +1,15 @@
 import React from 'react';
 import './details.css'
-import MovieContext from '../../movieContext/context';
+import { useMovieDetails, useShowSearch } from '../../hooks/customHooks';
 
 function MovieDetails() {
-  const { movieDetails, setSearchPage } = React.useContext(MovieContext);
+  const [movieDetails]    = useMovieDetails();
+  const [, setShowSearch] = useShowSearch();
 
   return (
     <div className="details-main-container">
       <div className="search-back-container">
-        <button type="button" className="btn-search-back" onClick={() => setSearchPage(true)}>
+        <button type="button" className="btn-search-back" onClick={() => setShowSearch(true)}>
           BACK TO SEARCH
         </button>
       </div>
