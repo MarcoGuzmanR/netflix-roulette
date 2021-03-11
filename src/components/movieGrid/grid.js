@@ -1,36 +1,38 @@
 import React from 'react';
 import './grid.css';
 import MovieItem from '../movieItem/item';
-import movieList from '../../movies';
+import { connect } from 'react-redux';
+// import movieList from '../../movies';
 
-function MovieGrid() {
+function MovieGrid({ movieList }) {
   // Simulate Error for ErrorBoundary component
   // throw new Error('Hello from error');
 
   const [movies, setMovies]   = React.useState();
-  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    const timeout = setTimeout(() => {
-      setMovies(movieList);
-      setLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timeout);
-  });
+    setMovies(movieList);
+  }, [movieList]);
 
   return (
     <div className="movie-grid-content">
-      { loading ?
+      { movieList.length ?
         (
-          <p>Loading movies...</p>
-        ) : (
           movies.map((movie) => (
             <MovieItem key={movie.id} movie={movie} />
-        ))
-      ) }
+          ))
+        ) : (
+          <p>Search for movies</p>
+        )
+      }
     </div>
   );
 };
 
-export default MovieGrid;
+function mapStateToProps(state) {
+  const { movies: movieList } = state.moviesState;
+
+  return { movieList };
+}
+
+export default connect(mapStateToProps)(MovieGrid);
