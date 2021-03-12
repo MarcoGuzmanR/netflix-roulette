@@ -1,5 +1,6 @@
 import {
   SEARCH_MOVIES,
+  LOAD_MOVIES,
 } from '../constants/movies';
 
 const moviesInitialState = {
@@ -9,6 +10,11 @@ const moviesInitialState = {
 function moviesReducer(state = moviesInitialState, action) {
   switch (action.type) {
     case SEARCH_MOVIES:
+      return {
+        ...state,
+        movies: action.movies
+      }
+    case LOAD_MOVIES:
       return {
         ...state,
         movies: action.movies
