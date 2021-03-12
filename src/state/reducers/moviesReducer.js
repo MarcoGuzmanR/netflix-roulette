@@ -1,6 +1,7 @@
 import {
   SEARCH_MOVIES,
   LOAD_MOVIES,
+  SORT_MOVIES
 } from '../constants/movies';
 
 const moviesInitialState = {
@@ -15,6 +16,11 @@ function moviesReducer(state = moviesInitialState, action) {
         movies: action.movies
       }
     case LOAD_MOVIES:
+      return {
+        ...state,
+        movies: action.movies
+      }
+    case SORT_MOVIES:
       return {
         ...state,
         movies: action.movies

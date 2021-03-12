@@ -2,13 +2,13 @@ import React from 'react';
 import './search.css'
 import { connect } from 'react-redux';
 import { searchMovies as searchMoviesAction } from '../../state/actions/movies';
-import { searchMovieService } from '../../services/movies';
+import MoviesService from '../../services/movies';
 
 function MovieSearch({searchMovies}) {
   const [query, setQuery] = React.useState('');
 
   async function submitSearch() {
-    const response = await searchMovieService(query);
+    const response = await MoviesService.searchMovies(query);
     searchMovies(response.data);
   }
 

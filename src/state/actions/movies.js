@@ -1,6 +1,7 @@
 import {
   SEARCH_MOVIES,
   LOAD_MOVIES,
+  SORT_MOVIES,
 } from '../constants/movies';
 
 export function searchMovies(movies){
@@ -13,6 +14,13 @@ export function searchMovies(movies){
 export function loadMovies(movies){
   return {
     type: LOAD_MOVIES,
+    movies: movies.data
+  }
+}
+
+export function sortMovies(movies){
+  return {
+    type: SORT_MOVIES,
     movies: movies.data
   }
 }

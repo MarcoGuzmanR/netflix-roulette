@@ -11,7 +11,7 @@ import MovieContext from './movieContext/context';
 import ErrorBoundary from './components/errorBoundary/errorBoundary';
 import ErrorFallback from './components/errorBoundary/errorFallback';
 import { connect } from 'react-redux';
-import { loadMoviesService } from './services/movies';
+import MoviesService from './services/movies';
 import { loadMovies as loadMoviesAction } from './state/actions/movies';
 
 function App({ loadMovies }) {
@@ -19,7 +19,7 @@ function App({ loadMovies }) {
   const [movieDetails, setMovieDetails] = React.useState({});
 
   React.useEffect(async () => {
-    const response = await loadMoviesService();
+    const response = await MoviesService.loadMovies();
 
     if (response.data) {
       loadMovies(response.data);

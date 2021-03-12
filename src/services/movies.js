@@ -1,28 +1,36 @@
 import { API_URL } from '../configs/endpoint';
 
-async function loadMoviesService() {
-  try {
-    const response = await fetch(API_URL);
-    const data     = await response.json();
-    return { data };
+const MoviesService = {
+  loadMovies: async () => {
+    try {
+      const response = await fetch(API_URL);
+      const data     = await response.json();
+      return { data };
+    }
+    catch (error) {
+      return { error: error.response };
+    }
+  },
+  searchMovies: async (query) => {
+    try {
+      const response = await fetch(`${API_URL}?search=${query}&searchBy=title`);
+      const data     = await response.json();
+      return { data };
+    }
+    catch (error) {
+      return { error: error.response };
+    }
+  },
+  sortMovies: async (sortBy) => {
+    try {
+      const response = await fetch(`${API_URL}?sortBy=${sortBy}`);
+      const data     = await response.json();
+      return { data };
+    }
+    catch (error) {
+      return { error: error.response };
+    }
   }
-  catch (error) {
-    return { error: error.response };
-  }
-}
-
-async function searchMovieService(query) {
-  try {
-    const response = await fetch(`${API_URL}?search=${query}&searchBy=title`);
-    const data     = await response.json();
-    return { data };
-  }
-  catch (error) {
-    return { error: error.response };
-  }
-}
-
-export {
-  loadMoviesService,
-  searchMovieService,
 };
+
+export default MoviesService;
