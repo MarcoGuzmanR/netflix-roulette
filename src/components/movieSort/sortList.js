@@ -1,5 +1,5 @@
 import React from 'react';
-import './sort-list.css'
+import './sortList.css'
 import { Listbox, ListboxOption } from '@reach/listbox';
 import "@reach/listbox/styles.css";
 
