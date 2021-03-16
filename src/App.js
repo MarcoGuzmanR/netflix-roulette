@@ -7,7 +7,6 @@ import MovieDetails from './components/movieDetails/details';
 import MovieFilter from './components/movieFilter/categoryFilter';
 import MovieSort from './components/movieSort/sortList';
 import MovieGrid from './components/movieGrid/grid';
-import MovieContext from './movieContext/context';
 import ErrorBoundary from './components/errorBoundary/errorBoundary';
 import ErrorFallback from './components/errorBoundary/errorFallback';
 import { connect } from 'react-redux';
@@ -15,8 +14,6 @@ import MoviesService from './services/movies';
 import { loadMovies as loadMoviesAction } from './state/actions/movies';
 
 function App({ showSearch, loadMovies }) {
-  const [movieDetails, setMovieDetails] = React.useState({});
-
   React.useEffect(async () => {
     const response = await MoviesService.loadMovies();
 
@@ -26,7 +23,7 @@ function App({ showSearch, loadMovies }) {
   }, []);
 
   return (
-    <MovieContext.Provider value={{movieDetails, setMovieDetails}}>
+    <React.Fragment>
       <div className="netflix-roulette-content">
         { showSearch ?
           (
@@ -48,7 +45,7 @@ function App({ showSearch, loadMovies }) {
           </ErrorBoundary>
         </div>
       </div>
-    </MovieContext.Provider>
+    </React.Fragment>
   );
 }
 

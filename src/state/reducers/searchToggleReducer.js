@@ -4,7 +4,7 @@ const initialState = {
   showSearch: true
 }
 
-function moviesReducer(state = initialState, action) {
+function searchToggleReducer(state = initialState, action) {
   switch (action.type) {
     case SEARCH_TOGGLE:
       return {
@@ -16,4 +16,4 @@ function moviesReducer(state = initialState, action) {
   }
 }
 
-export default moviesReducer;
+export default searchToggleReducer;

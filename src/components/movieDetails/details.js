@@ -2,11 +2,8 @@ import React from 'react';
 import './details.css'
 import { connect } from 'react-redux';
 import { setShowSearch as setShowSearchAction } from '../../state/actions/searchToggle';
-import { useMovieDetails } from '../../hooks/customHooks';
 
-function MovieDetails({ setShowSearch }) {
-  const [movieDetails]    = useMovieDetails();
-
+function MovieDetails({ movieDetails, setShowSearch }) {
   return (
     <div className="details-main-container">
       <div className="search-back-container">
@@ -36,6 +33,12 @@ function MovieDetails({ setShowSearch }) {
   );
 };
 
+function mapStateToProps(state) {
+  const { movieDetails } = state.movieDetailsState;
+
+  return { movieDetails };
+}
+
 function mapDispatchToProps(dispatch) {
   return {
     setShowSearch: (toggleValue) => {
@@ -44,4 +47,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(null, mapDispatchToProps)(MovieDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(MovieDetails);
