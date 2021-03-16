@@ -14,8 +14,7 @@ import { connect } from 'react-redux';
 import MoviesService from './services/movies';
 import { loadMovies as loadMoviesAction } from './state/actions/movies';
 
-function App({ loadMovies }) {
-  const [showSearch, setShowSearch] = React.useState(true);
+function App({ showSearch, loadMovies }) {
   const [movieDetails, setMovieDetails] = React.useState({});
 
   React.useEffect(async () => {
@@ -27,7 +26,7 @@ function App({ loadMovies }) {
   }, []);
 
   return (
-    <MovieContext.Provider value={{movieDetails, setMovieDetails, showSearch, setShowSearch}}>
+    <MovieContext.Provider value={{movieDetails, setMovieDetails}}>
       <div className="netflix-roulette-content">
         { showSearch ?
           (
@@ -53,6 +52,12 @@ function App({ loadMovies }) {
   );
 }
 
+function mapStateToProps(state) {
+  const { showSearch } = state.searchToggleState;
+
+  return { showSearch };
+}
+
 function mapDispatchToProps(dispatch) {
   return {
     loadMovies: (movies) => {
@@ -61,4 +66,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

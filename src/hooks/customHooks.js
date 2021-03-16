@@ -7,10 +7,4 @@ function useMovieDetails() {
   return [movieDetails, setMovieDetails]
 }
 
-function useShowSearch() {
-  const { showSearch, setShowSearch } = React.useContext(MovieContext);
-
-  return [showSearch, setShowSearch]
-}
-
-export { useMovieDetails, useShowSearch };
+export { useMovieDetails };

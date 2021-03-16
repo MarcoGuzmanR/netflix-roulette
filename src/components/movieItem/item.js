@@ -1,15 +1,16 @@
 import React from 'react';
 import './item.css';
+import { connect } from 'react-redux';
 import { Menu, MenuButton, MenuList, MenuItem } from '@reach/menu-button';
 import "@reach/menu-button/styles.css";
 import ModalMovieForm from '../modals/movieForm';
 import ModalMovieDelete from '../modals/movieDelete';
-import { useMovieDetails, useShowSearch } from '../../hooks/customHooks';
+import { useMovieDetails } from '../../hooks/customHooks';
+import { setShowSearch as setShowSearchAction } from '../../state/actions/searchToggle';
 import propTypes from 'prop-types';
 
-function MovieItem({ movie }) {
+function MovieItem({ movie, setShowSearch }) {
   const [, setMovieDetails] = useMovieDetails();
-  const [, setShowSearch]   = useShowSearch();
 
   const [showFormModal, setShowFormModal] = React.useState(false);
   const [showDeleteModal, setShowDeleteModal] = React.useState(false);
@@ -63,4 +64,12 @@ MovieItem.propTypes = {
   })
 };
 
-export default MovieItem;
+function mapDispatchToProps(dispatch) {
+  return {
+    setShowSearch: (toggleValue) => {
+      dispatch(setShowSearchAction(toggleValue));
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(MovieItem);
