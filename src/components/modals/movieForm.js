@@ -1,15 +1,17 @@
 import React from 'react';
 import './movieForm.css';
 import { DialogContent, DialogOverlay } from '@reach/dialog';
+import MovieService from '../../services/movie';
 import '@reach/dialog/styles.css';
 import propTypes from 'prop-types';
 
 function ModalMovieForm({ showModal, setShowModal, editMovie = {} }) {
   const movieObj = {
+    id:           editMovie?.id           || '',
     title:        editMovie?.title        || '',
     release_date: editMovie?.release_date || '',
-    movieURL:     editMovie?.movieURL     || '',
-    genres:       editMovie?.genres        || [],
+    poster_path:  editMovie?.poster_path  || '',
+    genres:       editMovie?.genres       || [],
     overview:     editMovie?.overview     || '',
     runtime:      editMovie?.runtime      || '',
   }
@@ -18,9 +20,15 @@ function ModalMovieForm({ showModal, setShowModal, editMovie = {} }) {
 
   const close = () => setShowModal(false);
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    console.log(movie);
+    const response =
+      movieObj.id ? await MovieService.updateMovie(movie) : await MovieService.createMovie(movie);
+
+    if (response.data) {
+      close();
+      console.log(response.data);
+    }
   }
 
   return (
@@ -68,8 +76,8 @@ function ModalMovieForm({ showModal, setShowModal, editMovie = {} }) {
                     className="input-form-movie"
                     type="text"
                     placeholder="Movie URL here"
-                    onChange={(event) => setMovie({ ...movie, movieURL: event.target.value })}
-                    value={ movie.movieURL }
+                    onChange={(event) => setMovie({ ...movie, poster_path: event.target.value })}
+                    value={ movie.poster_path }
                   />
               </label>
             </div>
@@ -81,8 +89,8 @@ function ModalMovieForm({ showModal, setShowModal, editMovie = {} }) {
                     className="input-form-movie"
                     type="text"
                     placeholder="Select Genre"
-                    onChange={(event) => setMovie({ ...movie, genre: event.target.value })}
-                    value={ movie.genre }
+                    onChange={(event) => setMovie({ ...movie, genres: event.target.value })}
+                    value={ movie.genres }
                   />
               </label>
             </div>

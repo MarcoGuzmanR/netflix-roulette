@@ -1,8 +1,6 @@
 import {
   ADD_MOVIE,
   LOAD_MOVIE,
-  UPDATE_MOVIE,
-  DELETE_MOVIE
 } from '../constants/movie';
 
 const movieInitialState = {
@@ -20,17 +18,6 @@ function movieReducer(state = movieInitialState, action) {
       return {
         ...state,
         movie
-      }
-    case UPDATE_MOVIE:
-      return {
-        ...state,
-        id,
-        movie
-      }
-    case DELETE_MOVIE:
-      return {
-        ...state,
-        id
       }
     default:
       return state;
