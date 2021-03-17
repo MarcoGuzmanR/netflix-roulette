@@ -31,12 +31,18 @@ function moviesReducer(state = initialState, action) {
     case ADD_MOVIE:
       return {
         ...state,
-        movies: state.movies.unshift(action.movie)
+        movies: [action.movie, ...state.movies]
       }
     case UPDATE_MOVIE:
+      const movieIndexToUpdate = state.movies.findIndex(movie => movie.id === action.movie.id);
+      const copyMovies = [...state.movies];
+
+      copyMovies.splice(movieIndexToUpdate, 1);
+      copyMovies.splice(movieIndexToUpdate, 0, action.movie);
+
       return {
         ...state,
-        movies: movies
+        movies: copyMovies
       }
     case DELETE_MOVIE:
       return {

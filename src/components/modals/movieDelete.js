@@ -13,8 +13,6 @@ function ModalMovieDelete({ showModal, setShowModal, movieId, refreshMovies }) {
   async function deleteMovieAction() {
     const response = await MovieService.deleteMovie(movieId);
 
-    console.log(response);
-
     refreshMovies(movieId);
     close();
   }
