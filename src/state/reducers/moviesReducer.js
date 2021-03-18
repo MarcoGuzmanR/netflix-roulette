@@ -2,10 +2,10 @@ import {
   SEARCH_MOVIES,
   LOAD_MOVIES,
   SORT_MOVIES,
+  FILTER_MOVIES,
   ADD_MOVIE,
   UPDATE_MOVIE,
-  DELETE_MOVIE,
-  FILTER_MOVIES
+  DELETE_MOVIE
 } from '../constants/movies';
 
 const initialState = {
@@ -17,34 +17,34 @@ function moviesReducer(state = initialState, action) {
     case SEARCH_MOVIES:
       return {
         ...state,
-        movies: action.movies
+        movies: action.payload
       }
     case LOAD_MOVIES:
       return {
         ...state,
-        movies: action.movies
+        movies: action.payload
       }
     case SORT_MOVIES:
       return {
         ...state,
-        movies: action.movies
+        movies: action.payload
       }
     case FILTER_MOVIES:
       return {
         ...state,
-        movies: action.movies
+        movies: action.payload
       }
     case ADD_MOVIE:
       return {
         ...state,
-        movies: [action.movie, ...state.movies]
+        movies: [action.payload, ...state.movies]
       }
     case UPDATE_MOVIE:
-      const movieIndexToUpdate = state.movies.findIndex(movie => movie.id === action.movie.id);
+      const movieIndexToUpdate = state.movies.findIndex(movie => movie.id === action.payload.id);
       const copyMovies = [...state.movies];
 
       copyMovies.splice(movieIndexToUpdate, 1);
-      copyMovies.splice(movieIndexToUpdate, 0, action.movie);
+      copyMovies.splice(movieIndexToUpdate, 0, action.payload);
 
       return {
         ...state,
@@ -53,7 +53,7 @@ function moviesReducer(state = initialState, action) {
     case DELETE_MOVIE:
       return {
         ...state,
-        movies: state.movies.filter(movie => movie.id !== action.movieId)
+        movies: state.movies.filter(movie => movie.id !== action.payload)
       }
     default:
       return state;

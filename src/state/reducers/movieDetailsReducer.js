@@ -9,7 +9,7 @@ function movieDetailsReducer(state = initialState, action) {
     case SET_MOVIE:
       return {
         ...state,
-        movieDetails: action.movie
+        movieDetails: action.payload
       }
     default:
       return state;

@@ -55,6 +55,22 @@ function ModalMovieForm({ showModal, setShowModal, editMovie = {}, refreshMovies
 
           <h1 className="modal-title">{ editMovie.id ? 'EDIT ' : 'ADD '}MOVIE</h1>
           <form onSubmit={handleSubmit}>
+            {editMovie.id ?
+              (<div className="row-container">
+                <label>
+                    <p className="input-label">MOVIE ID</p>
+                    <input
+                      className="input-form-movie"
+                      type="text"
+                      placeholder="Title here"
+                      value={ movie.id }
+                      disabled
+                    />
+                </label>
+              </div>
+              ) : null
+            }
+
             <div className="row-container">
               <label>
                   <p className="input-label">TITLE</p>

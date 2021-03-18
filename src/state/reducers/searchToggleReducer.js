@@ -9,7 +9,7 @@ function searchToggleReducer(state = initialState, action) {
     case SEARCH_TOGGLE:
       return {
         ...state,
-        showSearch: action.searchToggle
+        showSearch: action.payload
       }
     default:
       return state;
