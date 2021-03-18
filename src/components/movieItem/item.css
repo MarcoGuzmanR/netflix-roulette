@@ -11,6 +11,7 @@
 }
 
 .movie-title {
+  cursor: pointer;
   width: 90%;
 }
 
@@ -24,6 +25,10 @@
 .movie-genres {
   font-size: 14px;
   margin-top: 0;
+}
+
+.movie-container img {
+  cursor: pointer;
 }
 
 /* Override reach styling for the menu */

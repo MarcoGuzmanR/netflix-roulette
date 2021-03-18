@@ -30,6 +30,18 @@ const MoviesService = {
     catch (error) {
       return { error: error.response };
     }
+  },
+  filterMovies: async (filter) => {
+    const filterQuery = filter ? `?filter=${filter}` : '';
+
+    try {
+      const response = await fetch(`${API_URL}${filterQuery}`);
+      const data     = await response.json();
+      return { data };
+    }
+    catch (error) {
+      return { error: error.response };
+    }
   }
 };
 

@@ -30,11 +30,11 @@ function MovieItem({ movie, setMovieDetails, setShowSearch }) {
         </Menu>
       </div>
 
-      <div className="movie-container" onClick={setToggleSearchAndDetails}>
-        <img src={movie.poster_path} height="461" width="337" />
+      <div className="movie-container">
+        <img src={movie.poster_path} height="461" width="337" onClick={setToggleSearchAndDetails} />
 
         <div className="title-content">
-          <p className="movie-title">{movie.title}</p>
+          <p className="movie-title" onClick={setToggleSearchAndDetails}>{movie.title}</p>
           <span className="movie-date">{new Date(movie.release_date).getFullYear()}</span>
         </div>
 

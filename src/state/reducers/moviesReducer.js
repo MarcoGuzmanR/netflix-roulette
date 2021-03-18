@@ -4,7 +4,8 @@ import {
   SORT_MOVIES,
   ADD_MOVIE,
   UPDATE_MOVIE,
-  DELETE_MOVIE
+  DELETE_MOVIE,
+  FILTER_MOVIES
 } from '../constants/movies';
 
 const initialState = {
@@ -24,6 +25,11 @@ function moviesReducer(state = initialState, action) {
         movies: action.movies
       }
     case SORT_MOVIES:
+      return {
+        ...state,
+        movies: action.movies
+      }
+    case FILTER_MOVIES:
       return {
         ...state,
         movies: action.movies

@@ -2,6 +2,7 @@ import {
   SEARCH_MOVIES,
   LOAD_MOVIES,
   SORT_MOVIES,
+  FILTER_MOVIES,
   ADD_MOVIE,
   UPDATE_MOVIE,
   DELETE_MOVIE
@@ -24,6 +25,13 @@ export function loadMovies(movies){
 export function sortMovies(movies){
   return {
     type: SORT_MOVIES,
+    movies: movies.data
+  }
+}
+
+export function filterMovies(movies){
+  return {
+    type: FILTER_MOVIES,
     movies: movies.data
   }
 }
