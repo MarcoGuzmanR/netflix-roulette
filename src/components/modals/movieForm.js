@@ -5,6 +5,7 @@ import { DialogContent, DialogOverlay } from '@reach/dialog';
 import MovieService from '../../services/movie';
 import '@reach/dialog/styles.css';
 import propTypes from 'prop-types';
+import { useFormik } from 'formik';
 import { addMovie, updateMovie } from '../../state/actions/movies';
 
 function ModalMovieForm({ showModal, setShowModal, editMovie = {}, refreshMoviesAdd, refreshMoviesUpdate }) {
@@ -21,27 +22,56 @@ function ModalMovieForm({ showModal, setShowModal, editMovie = {}, refreshMovies
     movieObj.id = editMovie.id;
   }
 
-  const [movie, setMovie] = React.useState(movieObj);
+  const validate = (values) => {
+    const errors = {};
+    if (!values.title) {
+      errors.title = 'Title is required';
+    }
+
+    if (!values.poster_path) {
+      errors.poster_path = 'Movie URL is required';
+    }
+    else if (!/^(?:(?:https?|ftp):\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,}))\.?)(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(values.poster_path)) {
+      errors.poster_path = 'Invalid Movie URL';
+    }
+
+    if (!values.overview) {
+      errors.overview = 'Overview is required';
+    }
+
+    if (!values.runtime) {
+      errors.runtime = 'Runtime is required';
+    }
+
+    if (!values.genres.length) {
+      errors.genres = 'Genres is required';
+    }
+
+    return errors;
+  };
+
+  const formik = useFormik({
+    initialValues: movieObj,
+    validate,
+    onSubmit: async (values) => {
+      let response;
+
+      if (editMovie.id) {
+        response = await MovieService.updateMovie(values);
+        refreshMoviesUpdate(response.data);
+      }
+      else {
+        response = await MovieService.createMovie(values);
+        refreshMoviesAdd(response.data);
+      }
+
+      if (response.data) {
+        close();
+      }
+    }
+  });
 
   const close = () => setShowModal(false);
-
-  async function handleSubmit(event) {
-    event.preventDefault();
-    let response;
-
-    if (editMovie.id) {
-      response = await MovieService.updateMovie(movie);
-      refreshMoviesUpdate(response.data);
-    }
-    else {
-      response = await MovieService.createMovie(movie);
-      refreshMoviesAdd(response.data);
-    }
-
-    if (response.data) {
-      close();
-    }
-  }
 
   return (
     <div className="modal-container">
@@ -54,16 +84,16 @@ function ModalMovieForm({ showModal, setShowModal, editMovie = {}, refreshMovies
           </div>
 
           <h1 className="modal-title">{ editMovie.id ? 'EDIT ' : 'ADD '}MOVIE</h1>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={formik.handleSubmit}>
             {editMovie.id ?
               (<div className="row-container">
                 <label>
                     <p className="input-label">MOVIE ID</p>
                     <input
                       className="input-form-movie"
+                      name="id"
                       type="text"
-                      placeholder="Title here"
-                      value={ movie.id }
+                      value={ formik.values.id }
                       disabled
                     />
                 </label>
@@ -73,15 +103,17 @@ function ModalMovieForm({ showModal, setShowModal, editMovie = {}, refreshMovies
 
             <div className="row-container">
               <label>
-                  <p className="input-label">TITLE</p>
+                  <p className="input-label">TITLE*</p>
                   <input
                     className="input-form-movie"
+                    name="title"
                     type="text"
                     placeholder="Title here"
-                    onChange={(event) => setMovie({ ...movie, title: event.target.value })}
-                    value={ movie.title }
+                    onChange={ formik.handleChange }
+                    value={ formik.values.title }
                   />
               </label>
+              { formik.errors.title ? <p className="error-message">{ formik.errors.title }</p> : null }
             </div>
 
             <div className="row-container">
@@ -89,68 +121,77 @@ function ModalMovieForm({ showModal, setShowModal, editMovie = {}, refreshMovies
                   <p className="input-label">RELEASE DATE</p>
                   <input
                     className="input-form-movie"
+                    name="release_date"
                     type="text"
                     placeholder="Select Date"
-                    onChange={(event) => setMovie({ ...movie, release_date: event.target.value })}
-                    value={ movie.release_date }
+                    onChange={ formik.handleChange }
+                    value={ formik.values.release_date }
                   />
               </label>
             </div>
 
             <div className="row-container">
               <label>
-                  <p className="input-label">MOVIE URL</p>
+                  <p className="input-label">MOVIE URL*</p>
                   <input
                     className="input-form-movie"
+                    name="poster_path"
                     type="text"
                     placeholder="Movie URL here"
-                    onChange={(event) => setMovie({ ...movie, poster_path: event.target.value })}
-                    value={ movie.poster_path }
+                    onChange={ formik.handleChange }
+                    value={ formik.values.poster_path }
                   />
               </label>
+              { formik.errors.poster_path ? <p className="error-message">{ formik.errors.poster_path }</p> : null }
             </div>
 
             <div className="row-container">
               <label>
-                  <p className="input-label">GENRE</p>
+                  <p className="input-label">GENRES*</p>
                   <input
                     className="input-form-movie"
+                    name="genres"
                     type="text"
                     placeholder="Select Genre"
-                    onChange={(event) => setMovie({ ...movie, genres: event.target.value.split(',') })}
-                    value={ movie.genres }
+                    onChange={ (event) => { formik.setFieldValue('genres', event.target.value.split(',')) } }
+                    value={ formik.values.genres }
                   />
               </label>
+              { formik.errors.genres ? <p className="error-message">{ formik.errors.genres }</p> : null }
             </div>
 
             <div className="row-container">
               <label>
-                  <p className="input-label">OVERVIEW</p>
+                  <p className="input-label">OVERVIEW*</p>
                   <input
                     className="input-form-movie"
+                    name="overview"
                     type="text"
                     placeholder="Overview here"
-                    onChange={(event) => setMovie({ ...movie, overview: event.target.value })}
-                    value={ movie.overview }
+                    onChange={ formik.handleChange }
+                    value={ formik.values.overview }
                   />
               </label>
+              { formik.errors.overview ? <p className="error-message">{ formik.errors.overview }</p> : null }
             </div>
 
             <div className="row-container">
               <label>
-                  <p className="input-label">RUNTIME</p>
+                  <p className="input-label">RUNTIME*</p>
                   <input
                     className="input-form-movie"
+                    name="runtime"
                     type="text"
-                    placeholder="Overview here"
-                    onChange={(event) => setMovie({ ...movie, runtime: parseInt(event.target.value) })}
-                    value={ movie.runtime }
+                    placeholder="Runtime here"
+                    onChange={ (event) => { formik.setFieldValue('runtime', parseInt(event.target.value)) } }
+                    value={ formik.values.runtime }
                   />
               </label>
+              { formik.errors.runtime ? <p className="error-message">{ formik.errors.runtime }</p> : null }
             </div>
 
             <div className="button-container">
-              <button className="btn-reset" type="button">RESET</button>
+              <button className="btn-reset" type="button" onClick={formik.handleReset}>RESET</button>
               <button className="btn-submit" type="submit">{ editMovie.id ? 'SAVE' : 'SUBMIT' }</button>
             </div>
           </form>
