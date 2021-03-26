@@ -1,12 +1,18 @@
 import React from 'react';
 import './app.css';
 import './buttons.css';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom';
 import MovieAdd from './components/movieAdd/add';
 import MovieSearch from './components/movieSearch/search';
 import MovieDetails from './components/movieDetails/details';
 import MovieFilter from './components/movieFilter/categoryFilter';
 import MovieSort from './components/movieSort/sortList';
 import MovieGrid from './components/movieGrid/grid';
+import NotFound from './components/movieNotFound/notFound';
 import ErrorBoundary from './components/errorBoundary/errorBoundary';
 import ErrorFallback from './components/errorBoundary/errorFallback';
 import { connect } from 'react-redux';
@@ -24,27 +30,34 @@ function App({ showSearch, loadMovies }) {
 
   return (
     <React.Fragment>
-      <div className="netflix-roulette-content">
-        { showSearch ?
-          (
-            <>
-              <MovieAdd />
-              <MovieSearch />
-            </>
-          ) : <MovieDetails />
-        }
+      <Router>
+        <div className="netflix-roulette-content">
+          <Switch>
+            <Route exact path="/">
+              { showSearch ?
+                (
+                  <>
+                    <MovieAdd />
+                    <MovieSearch />
+                  </>
+                ) : <MovieDetails />
+              }
 
-        <div className="movie-main-content">
-          <div className="main-content--header">
-            <MovieFilter />
-            <MovieSort />
-          </div>
+              <div className="movie-main-content">
+                <div className="main-content--header">
+                  <MovieFilter />
+                  <MovieSort />
+                </div>
 
-          <ErrorBoundary FallbackComponent={ErrorFallback}>
-            <MovieGrid />
-          </ErrorBoundary>
+                <ErrorBoundary FallbackComponent={ErrorFallback}>
+                  <MovieGrid />
+                </ErrorBoundary>
+              </div>
+            </Route>
+            <Route path="*" component={NotFound} />
+          </Switch>
         </div>
-      </div>
+      </Router>
     </React.Fragment>
   );
 }
