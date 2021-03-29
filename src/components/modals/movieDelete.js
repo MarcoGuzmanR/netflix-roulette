@@ -1,14 +1,20 @@
 import React from 'react';
 import './movieDelete.css';
+import { connect } from 'react-redux';
 import { DialogContent, DialogOverlay } from '@reach/dialog';
+import MovieService from '../../services/movie';
 import '@reach/dialog/styles.css';
 import propTypes from 'prop-types';
+import { deleteMovie } from '../../state/actions/movies';
 
-function ModalMovieDelete({ showModal, setShowModal, movieId }) {
+function ModalMovieDelete({ showModal, setShowModal, movieId, refreshMovies }) {
   const close = () => setShowModal(false);
 
-  function deleteMovieAction() {
-    console.log(`Delete movie with id: ${ movieId }`);
+  async function deleteMovieAction() {
+    const response = await MovieService.deleteMovie(movieId);
+
+    refreshMovies(movieId);
+    close();
   }
 
   return (
@@ -39,4 +45,12 @@ ModalMovieDelete.propTypes = {
   movieId: propTypes.number.isRequired
 };
 
-export default ModalMovieDelete;
+function mapDispatchToProps(dispatch) {
+  return {
+    refreshMovies: (movieId) => {
+      dispatch(deleteMovie(movieId));
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(ModalMovieDelete);

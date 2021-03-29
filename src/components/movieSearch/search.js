@@ -1,7 +1,17 @@
 import React from 'react';
 import './search.css'
+import { connect } from 'react-redux';
+import { searchMovies as searchMoviesAction } from '../../state/actions/movies';
+import MoviesService from '../../services/movies';
 
-function MovieSearch() {
+function MovieSearch({searchMovies}) {
+  const [query, setQuery] = React.useState('');
+
+  async function submitSearch() {
+    const response = await MoviesService.searchMovies(query);
+    searchMovies(response.data);
+  }
+
   return (
     <div className="search-main-container">
       <div className="find-movie-container">
@@ -9,11 +19,25 @@ function MovieSearch() {
       </div>
 
       <div className="search-container">
-        <input id="movie-search" className="input-search" type="text" placeholder="What do you want to watch?" />
-        <button className="btn-search" type="button">SEARCH</button>
+        <input
+          id="movie-search"
+          className="input-search"
+          type="text"
+          placeholder="What do you want to watch?"
+          onChange={(event) => { setQuery(event.target.value)}}
+        />
+        <button className="btn-search" type="button" onClick={submitSearch}>SEARCH</button>
       </div>
     </div>
   );
 };
 
-export default MovieSearch;
+function mapDispatchToProps(dispatch) {
+  return {
+    searchMovies: (movies) => {
+      dispatch(searchMoviesAction(movies));
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(MovieSearch);

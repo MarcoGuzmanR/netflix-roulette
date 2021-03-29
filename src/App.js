@@ -7,16 +7,23 @@ import MovieDetails from './components/movieDetails/details';
 import MovieFilter from './components/movieFilter/categoryFilter';
 import MovieSort from './components/movieSort/sortList';
 import MovieGrid from './components/movieGrid/grid';
-import MovieContext from './movieContext/context';
 import ErrorBoundary from './components/errorBoundary/errorBoundary';
 import ErrorFallback from './components/errorBoundary/errorFallback';
+import { connect } from 'react-redux';
+import MoviesService from './services/movies';
+import { loadMovies as loadMoviesAction } from './state/actions/movies';
 
-function App() {
-  const [showSearch, setShowSearch] = React.useState(true);
-  const [movieDetails, setMovieDetails] = React.useState({});
+function App({ showSearch, loadMovies }) {
+  React.useEffect(async () => {
+    const response = await MoviesService.loadMovies();
+
+    if (response.data) {
+      loadMovies(response.data);
+    }
+  }, []);
 
   return (
-    <MovieContext.Provider value={{movieDetails, setMovieDetails, showSearch, setShowSearch}}>
+    <React.Fragment>
       <div className="netflix-roulette-content">
         { showSearch ?
           (
@@ -38,8 +45,22 @@ function App() {
           </ErrorBoundary>
         </div>
       </div>
-    </MovieContext.Provider>
+    </React.Fragment>
   );
 }
 
-export default App;
+function mapStateToProps(state) {
+  const { showSearch } = state.searchToggleState;
+
+  return { showSearch };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    loadMovies: (movies) => {
+      dispatch(loadMoviesAction(movies));
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

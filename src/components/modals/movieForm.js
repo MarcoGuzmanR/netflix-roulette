@@ -1,26 +1,46 @@
 import React from 'react';
 import './movieForm.css';
+import { connect } from 'react-redux';
 import { DialogContent, DialogOverlay } from '@reach/dialog';
+import MovieService from '../../services/movie';
 import '@reach/dialog/styles.css';
 import propTypes from 'prop-types';
+import { addMovie, updateMovie } from '../../state/actions/movies';
 
-function ModalMovieForm({ showModal, setShowModal, editMovie = {} }) {
+function ModalMovieForm({ showModal, setShowModal, editMovie = {}, refreshMoviesAdd, refreshMoviesUpdate }) {
   const movieObj = {
     title:        editMovie?.title        || '',
     release_date: editMovie?.release_date || '',
-    movieURL:     editMovie?.movieURL     || '',
-    genres:       editMovie?.genres        || [],
+    poster_path:  editMovie?.poster_path  || '',
+    genres:       editMovie?.genres       || [],
     overview:     editMovie?.overview     || '',
     runtime:      editMovie?.runtime      || '',
+  }
+
+  if (editMovie.id) {
+    movieObj.id = editMovie.id;
   }
 
   const [movie, setMovie] = React.useState(movieObj);
 
   const close = () => setShowModal(false);
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    console.log(movie);
+    let response;
+
+    if (editMovie.id) {
+      response = await MovieService.updateMovie(movie);
+      refreshMoviesUpdate(response.data);
+    }
+    else {
+      response = await MovieService.createMovie(movie);
+      refreshMoviesAdd(response.data);
+    }
+
+    if (response.data) {
+      close();
+    }
   }
 
   return (
@@ -35,6 +55,22 @@ function ModalMovieForm({ showModal, setShowModal, editMovie = {} }) {
 
           <h1 className="modal-title">{ editMovie.id ? 'EDIT ' : 'ADD '}MOVIE</h1>
           <form onSubmit={handleSubmit}>
+            {editMovie.id ?
+              (<div className="row-container">
+                <label>
+                    <p className="input-label">MOVIE ID</p>
+                    <input
+                      className="input-form-movie"
+                      type="text"
+                      placeholder="Title here"
+                      value={ movie.id }
+                      disabled
+                    />
+                </label>
+              </div>
+              ) : null
+            }
+
             <div className="row-container">
               <label>
                   <p className="input-label">TITLE</p>
@@ -68,8 +104,8 @@ function ModalMovieForm({ showModal, setShowModal, editMovie = {} }) {
                     className="input-form-movie"
                     type="text"
                     placeholder="Movie URL here"
-                    onChange={(event) => setMovie({ ...movie, movieURL: event.target.value })}
-                    value={ movie.movieURL }
+                    onChange={(event) => setMovie({ ...movie, poster_path: event.target.value })}
+                    value={ movie.poster_path }
                   />
               </label>
             </div>
@@ -81,8 +117,8 @@ function ModalMovieForm({ showModal, setShowModal, editMovie = {} }) {
                     className="input-form-movie"
                     type="text"
                     placeholder="Select Genre"
-                    onChange={(event) => setMovie({ ...movie, genre: event.target.value })}
-                    value={ movie.genre }
+                    onChange={(event) => setMovie({ ...movie, genres: event.target.value.split(',') })}
+                    value={ movie.genres }
                   />
               </label>
             </div>
@@ -107,7 +143,7 @@ function ModalMovieForm({ showModal, setShowModal, editMovie = {} }) {
                     className="input-form-movie"
                     type="text"
                     placeholder="Overview here"
-                    onChange={(event) => setMovie({ ...movie, runtime: event.target.value })}
+                    onChange={(event) => setMovie({ ...movie, runtime: parseInt(event.target.value) })}
                     value={ movie.runtime }
                   />
               </label>
@@ -129,4 +165,15 @@ ModalMovieForm.propTypes = {
   setShowModal: propTypes.func.isRequired,
 };
 
-export default ModalMovieForm;
+function mapDispatchToProps(dispatch) {
+  return {
+    refreshMoviesAdd: (movie) => {
+      dispatch(addMovie(movie));
+    },
+    refreshMoviesUpdate: (movie) => {
+      dispatch(updateMovie(movie));
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(ModalMovieForm);

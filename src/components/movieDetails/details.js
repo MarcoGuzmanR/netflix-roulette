@@ -1,11 +1,9 @@
 import React from 'react';
 import './details.css'
-import { useMovieDetails, useShowSearch } from '../../hooks/customHooks';
+import { connect } from 'react-redux';
+import { setShowSearch as setShowSearchAction } from '../../state/actions/searchToggle';
 
-function MovieDetails() {
-  const [movieDetails]    = useMovieDetails();
-  const [, setShowSearch] = useShowSearch();
-
+function MovieDetails({ movieDetails, setShowSearch }) {
   return (
     <div className="details-main-container">
       <div className="search-back-container">
@@ -35,4 +33,18 @@ function MovieDetails() {
   );
 };
 
-export default MovieDetails;
+function mapStateToProps(state) {
+  const { movieDetails } = state.movieDetailsState;
+
+  return { movieDetails };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setShowSearch: (toggleValue) => {
+      dispatch(setShowSearchAction(toggleValue));
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieDetails);
