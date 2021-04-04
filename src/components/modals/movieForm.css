@@ -31,3 +31,7 @@
 .button-container {
   text-align: right;
 }
+
+.error-message {
+  color: #ff3d3d;
+}
