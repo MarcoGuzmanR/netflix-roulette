@@ -1,9 +1,13 @@
 import React from 'react';
 import './details.css'
+import { useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setShowSearch as setShowSearchAction } from '../../state/actions/searchToggle';
 
-function MovieDetails({ movieDetails, setShowSearch }) {
+function MovieDetails() {
+  const { state } = useLocation();
+  const { movieDetails } = state;
+
   return (
     <div className="details-main-container">
       <div className="search-back-container">

@@ -16,33 +16,27 @@ import NotFound from './components/movieNotFound/notFound';
 import ErrorBoundary from './components/errorBoundary/errorBoundary';
 import ErrorFallback from './components/errorBoundary/errorFallback';
 import { connect } from 'react-redux';
-import MoviesService from './services/movies';
 import { loadMovies as loadMoviesAction } from './state/actions/movies';
+import { useQuery } from './hooks/customHooks';
 
 function App({ showSearch, loadMovies }) {
-  React.useEffect(async () => {
-    const response = await MoviesService.loadMovies();
-
-    if (response.data) {
-      loadMovies(response.data);
-    }
-  }, []);
-
   return (
     <React.Fragment>
       <Router>
         <div className="netflix-roulette-content">
           <Switch>
             <Route exact path="/">
-              { showSearch ?
-                (
-                  <>
-                    <MovieAdd />
-                    <MovieSearch />
-                  </>
-                ) : <MovieDetails />
-              }
+                <>
+                  <MovieAdd />
+                  <MovieSearch />
+                </>
+            </Route>
 
+            <Route exact path="/film/:id">
+              <MovieDetails />
+            </Route>
+
+            <Route exact path="/search">
               <div className="movie-main-content">
                 <div className="main-content--header">
                   <MovieFilter />

@@ -2,6 +2,7 @@ import React from 'react';
 import './item.css';
 import { connect } from 'react-redux';
 import { Menu, MenuButton, MenuList, MenuItem } from '@reach/menu-button';
+import { Link } from 'react-router-dom';
 import "@reach/menu-button/styles.css";
 import ModalMovieForm from '../modals/movieForm';
 import ModalMovieDelete from '../modals/movieDelete';
@@ -31,7 +32,9 @@ function MovieItem({ movie, setMovieDetails, setShowSearch }) {
       </div>
 
       <div className="movie-container">
-        <img src={movie.poster_path} height="461" width="337" onClick={setToggleSearchAndDetails} />
+        <Link to={{ pathname: `/film/${movie.id}`, state: {movieDetails: movie} }}>
+          <img src={movie.poster_path} height="461" width="337" />
+        </Link>
 
         <div className="title-content">
           <p className="movie-title" onClick={setToggleSearchAndDetails}>{movie.title}</p>

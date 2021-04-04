@@ -2,17 +2,12 @@ import React from 'react';
 import './grid.css';
 import MovieItem from '../movieItem/item';
 import { connect } from 'react-redux';
-// import movieList from '../../movies';
 
 function MovieGrid({ movieList }) {
   // Simulate Error for ErrorBoundary component
   // throw new Error('Hello from error');
 
-  const [movies, setMovies]   = React.useState();
-
-  React.useEffect(() => {
-    setMovies(movieList);
-  }, [movieList]);
+  const [movies, setMovies] = React.useState(movieList);
 
   return (
     <div className="movie-grid-content">
@@ -22,7 +17,9 @@ function MovieGrid({ movieList }) {
             <MovieItem key={movie.id} movie={movie} />
           ))
         ) : (
-          <p>Search for movies</p>
+          <div>
+            <h2>Search for movies</h2>
+          </div>
         )
       }
     </div>

@@ -1,15 +1,18 @@
 import React from 'react';
 import './search.css'
 import { connect } from 'react-redux';
+import { useHistory } from "react-router-dom";
 import { searchMovies as searchMoviesAction } from '../../state/actions/movies';
 import MoviesService from '../../services/movies';
 
 function MovieSearch({searchMovies}) {
   const [query, setQuery] = React.useState('');
+  let history = useHistory();
 
   async function submitSearch() {
     const response = await MoviesService.searchMovies(query);
     searchMovies(response.data);
+    history.push('/search');
   }
 
   return (
