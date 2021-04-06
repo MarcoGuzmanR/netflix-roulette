@@ -2,6 +2,7 @@ import React from 'react';
 import './grid.css';
 import MovieItem from '../movieItem/item';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 function MovieGrid({ movieList }) {
   // Simulate Error for ErrorBoundary component
@@ -9,20 +10,29 @@ function MovieGrid({ movieList }) {
 
   const [movies, setMovies] = React.useState(movieList);
 
+  React.useEffect(() => {
+    setMovies(movieList);
+  }, [movieList]);
+
   return (
-    <div className="movie-grid-content">
+    <React.Fragment>
       { movieList.length ?
         (
-          movies.map((movie) => (
-            <MovieItem key={movie.id} movie={movie} />
-          ))
+          <div className="movie-grid-content">
+            {movies.map((movie) => (
+              <MovieItem key={movie.id} movie={movie} />
+            ))}
+          </div>
         ) : (
-          <div>
-            <h2>Search for movies</h2>
+          <div className="movies-not-found">
+            <h1>No movie found</h1>
+            <button type="button" className="btn-confirm">
+              <Link to="/">GO BACK TO SEARCH</Link>
+            </button>
           </div>
         )
       }
-    </div>
+    </React.Fragment>
   );
 };
 

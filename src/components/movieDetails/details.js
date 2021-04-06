@@ -1,8 +1,7 @@
 import React from 'react';
 import './details.css'
 import { useLocation } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { setShowSearch as setShowSearchAction } from '../../state/actions/searchToggle';
+import { Link } from 'react-router-dom';
 
 function MovieDetails() {
   const { state } = useLocation();
@@ -11,8 +10,8 @@ function MovieDetails() {
   return (
     <div className="details-main-container">
       <div className="search-back-container">
-        <button type="button" className="btn-search-back" onClick={() => setShowSearch(true)}>
-          BACK TO SEARCH
+        <button type="button" className="btn-search-back">
+          <Link to="/">BACK TO SEARCH</Link>
         </button>
       </div>
 
@@ -37,18 +36,4 @@ function MovieDetails() {
   );
 };
 
-function mapStateToProps(state) {
-  const { movieDetails } = state.movieDetailsState;
-
-  return { movieDetails };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    setShowSearch: (toggleValue) => {
-      dispatch(setShowSearchAction(toggleValue));
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(MovieDetails);
+export default MovieDetails;

@@ -12,7 +12,10 @@ function MovieSearch({searchMovies}) {
   async function submitSearch() {
     const response = await MoviesService.searchMovies(query);
     searchMovies(response.data);
-    history.push('/search');
+    history.push({
+      pathname: '/search',
+      search: `?${query}`
+    });
   }
 
   return (

@@ -1,23 +1,15 @@
 import React from 'react';
 import './item.css';
-import { connect } from 'react-redux';
 import { Menu, MenuButton, MenuList, MenuItem } from '@reach/menu-button';
 import { Link } from 'react-router-dom';
 import "@reach/menu-button/styles.css";
 import ModalMovieForm from '../modals/movieForm';
 import ModalMovieDelete from '../modals/movieDelete';
-import { setMovieDetails as setMovieDetailsAction } from '../../state/actions/movieDetails';
-import { setShowSearch as setShowSearchAction } from '../../state/actions/searchToggle';
 import propTypes from 'prop-types';
 
-function MovieItem({ movie, setMovieDetails, setShowSearch }) {
+function MovieItem({ movie }) {
   const [showFormModal, setShowFormModal] = React.useState(false);
   const [showDeleteModal, setShowDeleteModal] = React.useState(false);
-
-  function setToggleSearchAndDetails() {
-    setMovieDetails(movie);
-    setShowSearch(false);
-  }
 
   return (
     <div className="item-container">
@@ -37,7 +29,7 @@ function MovieItem({ movie, setMovieDetails, setShowSearch }) {
         </Link>
 
         <div className="title-content">
-          <p className="movie-title" onClick={setToggleSearchAndDetails}>{movie.title}</p>
+          <p className="movie-title">{movie.title}</p>
           <span className="movie-date">{new Date(movie.release_date).getFullYear()}</span>
         </div>
 
@@ -65,15 +57,4 @@ MovieItem.propTypes = {
   })
 };
 
-function mapDispatchToProps(dispatch) {
-  return {
-    setMovieDetails: (movie) => {
-      dispatch(setMovieDetailsAction(movie));
-    },
-    setShowSearch: (toggleValue) => {
-      dispatch(setShowSearchAction(toggleValue));
-    }
-  }
-}
-
-export default connect(null, mapDispatchToProps)(MovieItem);
+export default MovieItem;

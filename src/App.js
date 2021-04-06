@@ -19,7 +19,7 @@ import { connect } from 'react-redux';
 import { loadMovies as loadMoviesAction } from './state/actions/movies';
 import { useQuery } from './hooks/customHooks';
 
-function App({ showSearch, loadMovies }) {
+function App() {
   return (
     <React.Fragment>
       <Router>
