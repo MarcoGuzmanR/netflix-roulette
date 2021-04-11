@@ -3,3 +3,11 @@
   flex-wrap: wrap;
   justify-content: space-between;
 }
+
+.movies-not-found {
+  margin: 10% 0;
+}
+
+.movies-not-found {
+  text-align: center;
+}
