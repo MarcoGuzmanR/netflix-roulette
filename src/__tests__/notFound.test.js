@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import * as React from 'react'
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom'
