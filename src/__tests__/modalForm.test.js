@@ -1,13 +1,12 @@
 import '@testing-library/jest-dom';
 import * as React from 'react'
-import { render, screen } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import ModalMovieForm from '../components/modals/movieForm';
 
-test('Displays the add form modal', async () => {
+test('Displays and submits the data in form modal', async () => {
   const newMovie = {
     title: 'New movie',
     release_date: '2021-01-01',
@@ -25,10 +24,11 @@ test('Displays the add form modal', async () => {
 
   const show = true;
   const setShow = jest.fn();
+  const submitForm = jest.fn();
 
   render(
     <Provider store={store}>
-      <ModalMovieForm showModal={show} setShowModal={setShow} />
+      <ModalMovieForm showModal={show} setShowModal={setShow} onSubmit={submitForm} />
     </Provider>
   );
 
@@ -40,11 +40,9 @@ test('Displays the add form modal', async () => {
   userEvent.type(screen.getByText(/runtime/i), newMovie.runtime);
 
 
-  act(async () => {
-    await userEvent.click(screen.getByText(/submit/i))
-    console.log(await store.getState());
+  waitFor(() => {
+    userEvent.click(screen.getByText(/submit/i))
+    expect(submitForm).toHaveBeenCalledWith(newMovie);
   });
 
-
-  screen.debug();
 });
