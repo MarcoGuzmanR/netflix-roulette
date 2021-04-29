@@ -1,0 +1,43 @@
+.details-container {
+  display: flex;
+}
+
+.search-back-container {
+  text-align: right;
+}
+
+.info-container {
+  margin-left: 50px;
+}
+
+.info-container .title-container {
+  margin-top: 25px;
+}
+
+.title-container .title-details {
+  font-size: 3rem;
+  margin-right: 25px;
+}
+
+.title-container .average-details {
+  border: 1.5px solid white;
+  border-radius: 50%;
+  color: #03aa03;
+  font-size: 2rem;
+  margin-right: 25px;
+  padding: 12px;
+}
+
+.title-container .genres {
+  margin-top: 15px;
+}
+
+.date-container {
+  font-size: 1.8rem;
+  margin: 30px 0;
+}
+
+.date-container span {
+  color: #f65261;
+  margin-right: 30px;
+}

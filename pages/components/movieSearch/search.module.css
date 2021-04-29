@@ -1,0 +1,24 @@
+.search-main-container {
+  width: 100%;
+}
+
+.find-movie-container {
+  margin: 20px 0;
+  font-size: 2.5rem;
+}
+
+.search-container {
+  display: flex;
+}
+
+.input-search {
+  background-color: #424242;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  font-size: 20px;
+  height: 50px;
+  margin-right: 20px;
+  padding: 0 15px;
+  width: -webkit-fill-available;
+}
