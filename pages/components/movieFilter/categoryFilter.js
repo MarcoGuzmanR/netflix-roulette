@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './categoryFilter.module.css';
 import { connect } from 'react-redux';
 import MoviesService from '../../services/movies';
 import { filterMovies as filterMoviesAction } from '../../state/actions/movies';
@@ -13,7 +14,7 @@ function MovieFilter({ filterMovies }) {
   }
 
   return (
-    <div className="filter-container">
+    <div className={styles['filter-container']}>
       <span onClick={() => applyFilter()}>ALL</span>
       <span onClick={() => applyFilter('Documentary')}>DOCUMENTARY</span>
       <span onClick={() => applyFilter('Comedy')}>COMEDY</span>

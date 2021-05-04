@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './item.module.css';
 import { Menu, MenuButton, MenuList, MenuItem } from '@reach/menu-button';
 import { Link } from 'react-router-dom';
 import "@reach/menu-button/styles.css";
@@ -11,8 +12,8 @@ function MovieItem({ movie }) {
   const [showDeleteModal, setShowDeleteModal] = React.useState(false);
 
   return (
-    <div className="item-container">
-      <div className="menu-action">
+    <div className={styles['item-container']}>
+      <div className={styles['menu-action']}>
         <Menu>
           <MenuButton>Actions</MenuButton>
           <MenuList>
@@ -22,17 +23,17 @@ function MovieItem({ movie }) {
         </Menu>
       </div>
 
-      <div className="movie-container">
+      <div className={styles['movie-container']}>
         <Link to={{ pathname: `/film/${movie.id}`, state: {movieDetails: movie} }}>
           <img src={movie.poster_path} height="461" width="337" />
         </Link>
 
-        <div className="title-content">
-          <p className="movie-title">{movie.title}</p>
-          <span className="movie-date">{new Date(movie.release_date).getFullYear()}</span>
+        <div className={styles['title-content']}>
+          <p className={styles['movie-title']}>{movie.title}</p>
+          <span className={styles['movie-date']}>{new Date(movie.release_date).getFullYear()}</span>
         </div>
 
-        <p className="movie-genres">{movie.genres.join(', ')}</p>
+        <p className={styles['movie-genres']}>{movie.genres.join(', ')}</p>
       </div>
 
       <ModalMovieForm

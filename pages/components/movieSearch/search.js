@@ -19,15 +19,15 @@ function MovieSearch({searchMovies}) {
   }
 
   return (
-    <div className="search-main-container">
-      <div className="find-movie-container">
+    <div className={styles['search-main-container']}>
+      <div className={styles['find-movie-container']}>
         <label htmlFor="movie-search">FIND YOUR MOVIE</label>
       </div>
 
-      <div className="search-container">
+      <div className={styles['search-container']}>
         <input
           id="movie-search"
-          className="input-search"
+          className={styles['input-search']}
           type="text"
           placeholder="What do you want to watch?"
           onChange={(event) => { setQuery(event.target.value)}}

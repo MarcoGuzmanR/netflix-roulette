@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './grid.module.css';
 import MovieItem from '../movieItem/item';
 import { connect } from 'react-redux';
 
@@ -16,13 +17,13 @@ function MovieGrid({ movieList }) {
     <React.Fragment>
       { movieList.length ?
         (
-          <div className="movie-grid-content">
+          <div className={styles['movie-grid-content']}>
             {movies.map((movie) => (
               <MovieItem key={movie.id} movie={movie} />
             ))}
           </div>
         ) : (
-          <div className="movies-not-found">
+          <div className={styles['movies-not-found']}>
             <h1>No movie found</h1>
             <button type="button" className="btn-confirm">GO BACK TO SEARCH</button>
           </div>

@@ -1,0 +1,8 @@
+.sort-content {
+  display: flex;
+  width: 27%;
+}
+
+.sort-content span {
+  margin-right: 15px;
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './sortList.module.css';
 import { connect } from 'react-redux';
 import { Listbox, ListboxOption } from '@reach/listbox';
 import "@reach/listbox/styles.css";
@@ -16,7 +17,7 @@ function MovieSort({ sortMovies }) {
   }
 
   return (
-    <div className="sort-content">
+    <div className={styles['sort-content']}>
       <span>SORT BY</span>
       <Listbox aria-labelledby="sort-by" value={sortBy} onChange={(value) => submitSorting(value)}>
         <ListboxOption value="release_date">RELEASE DATE</ListboxOption>

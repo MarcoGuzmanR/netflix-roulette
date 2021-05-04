@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './movieForm.module.css';
 import { connect } from 'react-redux';
 import { DialogContent, DialogOverlay } from '@reach/dialog';
 import MovieService from '../../services/movie';
@@ -75,21 +76,21 @@ function ModalMovieForm({ showModal, setShowModal, editMovie = {}, refreshMovies
   return (
     <div className="modal-container">
       <DialogOverlay aria-label="movie" isOpen={showModal} onDismiss={close}>
-        <DialogContent aria-label="movie" className="modal-content">
-          <div className="button-container">
+        <DialogContent aria-label="movie" className={styles['modal-content']}>
+          <div className={styles['button-container']}>
             <button className="btn-close" onClick={close}>
               <span aria-hidden>×</span>
             </button>
           </div>
 
-          <h1 className="modal-title">{ editMovie.id ? 'EDIT ' : 'ADD '}MOVIE</h1>
+          <h1 className={styles['modal-title']}>{ editMovie.id ? 'EDIT ' : 'ADD '}MOVIE</h1>
           <form onSubmit={formik.handleSubmit}>
             {editMovie.id ?
-              (<div className="row-container">
+              (<div className={styles['row-container']}>
                 <label>
-                    <p className="input-label">MOVIE ID</p>
+                    <p className={styles['input-label']}>MOVIE ID</p>
                     <input
-                      className="input-form-movie"
+                      className={styles['input-form-movie']}
                       name="id"
                       type="text"
                       value={ formik.values.id }
@@ -100,11 +101,11 @@ function ModalMovieForm({ showModal, setShowModal, editMovie = {}, refreshMovies
               ) : null
             }
 
-            <div className="row-container">
+            <div className={styles['row-container']}>
               <label>
-                  <p className="input-label">TITLE*</p>
+                  <p className={styles['input-label']}>TITLE*</p>
                   <input
-                    className="input-form-movie"
+                    className={styles['input-form-movie']}
                     name="title"
                     type="text"
                     placeholder="Title here"
@@ -112,14 +113,14 @@ function ModalMovieForm({ showModal, setShowModal, editMovie = {}, refreshMovies
                     value={ formik.values.title }
                   />
               </label>
-              { formik.errors.title ? <p className="error-message">{ formik.errors.title }</p> : null }
+              { formik.errors.title ? <p className={styles['error-message']}>{ formik.errors.title }</p> : null }
             </div>
 
-            <div className="row-container">
+            <div className={styles['row-container']}>
               <label>
-                  <p className="input-label">RELEASE DATE</p>
+                  <p className={styles['input-label']}>RELEASE DATE</p>
                   <input
-                    className="input-form-movie"
+                    className={styles['input-form-movie']}
                     name="release_date"
                     type="text"
                     placeholder="Select Date"
@@ -129,11 +130,11 @@ function ModalMovieForm({ showModal, setShowModal, editMovie = {}, refreshMovies
               </label>
             </div>
 
-            <div className="row-container">
+            <div className={styles['row-container']}>
               <label>
-                  <p className="input-label">MOVIE URL*</p>
+                  <p className={styles['input-label']}>MOVIE URL*</p>
                   <input
-                    className="input-form-movie"
+                    className={styles['input-form-movie']}
                     name="poster_path"
                     type="text"
                     placeholder="Movie URL here"
@@ -141,14 +142,14 @@ function ModalMovieForm({ showModal, setShowModal, editMovie = {}, refreshMovies
                     value={ formik.values.poster_path }
                   />
               </label>
-              { formik.errors.poster_path ? <p className="error-message">{ formik.errors.poster_path }</p> : null }
+              { formik.errors.poster_path ? <p className={styles['error-message']}>{ formik.errors.poster_path }</p> : null }
             </div>
 
-            <div className="row-container">
+            <div className={styles['row-container']}>
               <label>
-                  <p className="input-label">GENRES*</p>
+                  <p className={styles['input-label']}>GENRES*</p>
                   <input
-                    className="input-form-movie"
+                    className={styles['input-form-movie']}
                     name="genres"
                     type="text"
                     placeholder="Select Genre"
@@ -156,14 +157,14 @@ function ModalMovieForm({ showModal, setShowModal, editMovie = {}, refreshMovies
                     value={ formik.values.genres }
                   />
               </label>
-              { formik.errors.genres ? <p className="error-message">{ formik.errors.genres }</p> : null }
+              { formik.errors.genres ? <p className={styles['error-message']}>{ formik.errors.genres }</p> : null }
             </div>
 
-            <div className="row-container">
+            <div className={styles['row-container']}>
               <label>
-                  <p className="input-label">OVERVIEW*</p>
+                  <p className={styles['input-label']}>OVERVIEW*</p>
                   <input
-                    className="input-form-movie"
+                    className={styles['input-form-movie']}
                     name="overview"
                     type="text"
                     placeholder="Overview here"
@@ -171,14 +172,14 @@ function ModalMovieForm({ showModal, setShowModal, editMovie = {}, refreshMovies
                     value={ formik.values.overview }
                   />
               </label>
-              { formik.errors.overview ? <p className="error-message">{ formik.errors.overview }</p> : null }
+              { formik.errors.overview ? <p className={styles['error-message']}>{ formik.errors.overview }</p> : null }
             </div>
 
-            <div className="row-container">
+            <div className={styles['row-container']}>
               <label>
-                  <p className="input-label">RUNTIME*</p>
+                  <p className={styles['input-label']}>RUNTIME*</p>
                   <input
-                    className="input-form-movie"
+                    className={styles['input-form-movie']}
                     name="runtime"
                     type="text"
                     placeholder="Runtime here"
@@ -186,10 +187,10 @@ function ModalMovieForm({ showModal, setShowModal, editMovie = {}, refreshMovies
                     value={ formik.values.runtime }
                   />
               </label>
-              { formik.errors.runtime ? <p className="error-message">{ formik.errors.runtime }</p> : null }
+              { formik.errors.runtime ? <p className={styles['error-message']}>{ formik.errors.runtime }</p> : null }
             </div>
 
-            <div className="button-container">
+            <div className={styles['button-container']}>
               <button className="btn-reset" type="button" onClick={formik.handleReset}>RESET</button>
               <button className="btn-submit" type="submit">{ editMovie.id ? 'SAVE' : 'SUBMIT' }</button>
             </div>
