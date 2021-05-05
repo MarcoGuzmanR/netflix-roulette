@@ -11,16 +11,18 @@ import ErrorFallback from './components/errorBoundary/errorFallback';
 import { connect } from 'react-redux';
 import { loadMovies as loadMoviesAction } from './state/actions/movies';
 
-function App() {
+function App({ showSearch }) {
   return (
     <React.Fragment>
       <div className="netflix-roulette-content">
-        <>
-          <MovieAdd />
-          <MovieSearch />
-        </>
-
-        <MovieDetails />
+        { showSearch ?
+          (
+            <>
+              <MovieAdd />
+              <MovieSearch />
+            </>
+          ) : <MovieDetails />
+        }
 
         <div className="movie-main-content">
           <div className="main-content--header">

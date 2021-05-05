@@ -1,21 +1,15 @@
 import React from 'react';
 import styles from './search.module.css';
 import { connect } from 'react-redux';
-import { useHistory } from "react-router-dom";
 import { searchMovies as searchMoviesAction } from '../../state/actions/movies';
 import MoviesService from '../../services/movies';
 
 function MovieSearch({searchMovies}) {
   const [query, setQuery] = React.useState('');
-  let history = useHistory();
 
   async function submitSearch() {
     const response = await MoviesService.searchMovies(query);
     searchMovies(response.data);
-    history.push({
-      pathname: '/search',
-      search: `?${query}`
-    });
   }
 
   return (
@@ -30,7 +24,7 @@ function MovieSearch({searchMovies}) {
           className={styles['input-search']}
           type="text"
           placeholder="What do you want to watch?"
-          onChange={(event) => { setQuery(event.target.value)}}
+          onChange={(event) => { setQuery(event.target.value) }}
         />
         <button className="btn-search" type="button" onClick={submitSearch}>SEARCH</button>
       </div>

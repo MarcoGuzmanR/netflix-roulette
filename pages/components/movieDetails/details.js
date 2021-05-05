@@ -1,13 +1,15 @@
 import React from 'react';
 import styles from './details.module.css';
+import { connect } from 'react-redux';
+import { setShowSearch as setShowSearchAction } from '../../state/actions/searchToggle';
 
-function MovieDetails() {
-  const movieDetails = {};
-
+function MovieDetails({ movieDetails, setShowSearch }) {
   return (
     <div className="details-main-container">
       <div className={styles['search-back-container']}>
-        <button type="button" className="btn-search-back">BACK TO SEARCH</button>
+        <button type="button" className="btn-search-back" onClick={() => setShowSearch(true)}>
+          BACK TO SEARCH
+        </button>
       </div>
 
       <div className={styles['details-container']}>
@@ -31,4 +33,18 @@ function MovieDetails() {
   );
 };
 
-export default MovieDetails;
+function mapStateToProps(state) {
+  const { movieDetails } = state.movieDetailsState;
+
+  return { movieDetails };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setShowSearch: (toggleValue) => {
+      dispatch(setShowSearchAction(toggleValue));
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieDetails);
