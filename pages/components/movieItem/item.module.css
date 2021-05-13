@@ -1,0 +1,32 @@
+.item-container {
+  margin: 18px 0;
+}
+
+.menu-action {
+  position: absolute;
+}
+
+.title-content {
+  display: flex;
+}
+
+.movie-title {
+  cursor: pointer;
+  width: 90%;
+}
+
+.movie-date {
+  border: 1px solid #555555;
+  border-radius: 3px;
+  margin: 10px 0 10px 10px;
+  padding: 5px 15px;
+}
+
+.movie-genres {
+  font-size: 14px;
+  margin-top: 0;
+}
+
+.movie-container img {
+  cursor: pointer;
+}

@@ -1,0 +1,56 @@
+.btn-submit, .btn-confirm {
+  background-color: #f65261;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  height: 50px;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+.btn-reset {
+  background-color: transparent;
+  border-color: #f65261;
+  border-radius: 3px;
+  color: #f65261;
+  height: 50px;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+.btn-add {
+  background-color: #555;
+  border: none;
+  border-radius: 3px;
+  color: #f65261;
+  height: 50px;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+.btn-search {
+  background-color: #f65251;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  height: 50px;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+.btn-search-back {
+  background-color: #232323;
+  border: none;
+  border-radius: 5px;
+  color: #f65251;
+  height: 50px;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+.btn-close {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font-size: 30px;
+}

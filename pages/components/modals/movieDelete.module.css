@@ -1,0 +1,9 @@
+.modal-content {
+  /* Override reach styling for the dialog */
+  background-color: #232323 !important;
+  width: 35vw !important;
+}
+
+.modal-title {
+  color: white;
+}
